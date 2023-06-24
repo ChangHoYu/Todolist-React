@@ -1,0 +1,31 @@
+.container {
+    width: 80%;
+}
+
+.item {
+    display: inline-block;
+    width: 500px;
+    clear: both;;
+}
+
+.result {
+    float: left;
+}
+
+.buttons {
+    display: inline-block;
+    width: 100px;
+    float: right;
+    margin-right: 50px;
+    margin-left: 0px;
+}
+
+.delete {
+    position: relative;
+    left: 80px;
+}
+
+.complete {
+    position: relative;
+    left: 70px;
+}

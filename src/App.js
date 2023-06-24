@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Input from './component/Input';
+import Todo from './component/Todo';
+import Card from './component/UI/Card';
+import Title from './component/Title';
+
 
 function App() {
+  const [toDo , setToDo] = useState([
+  ]);
+  const [id, setId] = useState(0);
+
+  const onCreate = (enteredInput) =>{
+    const content = {
+      id: id,
+      text: enteredInput, 
+      check: false
+    };
+    setId(id+1);
+    setToDo((pre)=>[ content, ...pre]);
+    console.log(toDo);
+  };
+  
+  const onComplete = (id) => {
+    setToDo(toDo.map(todo => todo.id === id ? {...todo, check: true} : todo));
+  }
+
+  const onRemove = (id) => {
+    setToDo((pre)=>pre.filter(todo=> todo.id !== id))
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Card>
+      <Title />
+      <Input onCreate={onCreate}/>
+      </Card>
+      <Card>
+      <Todo todo={toDo} onRemove={onRemove} onComplete={onComplete}/>
+      </Card>
+    </>
   );
 }
 
